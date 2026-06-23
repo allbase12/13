@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>parexxallgames - Portal Top-Up Game & Voucher Premium</title>
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="parexxallgames menyediakan layanan top-up game online terlengkap seperti Mobile Legends, Free Fire, Valorant dengan harga termurah dan proses instan otomatis 24 jam.">
+    <meta name="keywords" content="topup ml, topup ff, voucher game, codashop, diamond mobile legends, valorant points, qris, dana, gopay">
+    <meta name="author" content="parexxallgames Inc.">
+    
+    <!-- Open Graph tags for Social Media -->
+    <meta property="og:title" content="parexxallgames - Portal Top-Up Game & Voucher Premium">
+    <meta property="og:description" content="Portal top-up game instan otomatis 24 jam termurah, tercepat, terpercaya di Indonesia.">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://www.codashop.com/favicon.ico">
+    
+    <!-- FontAwesome & Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Three.js 3D Background Canvas -->
+    <div id="canvas-container"></div>
+    
+    <!-- 3D Interactive Parallax Gusion Portrait -->
+    <div id="gusion-hero-overlay"></div>
+
+    <div class="app-container">
+        <!-- Brand Header & Navigation Section -->
+        <header>
+            <div class="brand-section">
+                <div class="logo" id="store-logo">
+                    <h1>parexxallgames</h1>
+                    <span>Master of Topups</span>
+                </div>
+            </div>
+            
+            <div class="controls-section">
+                <!-- Search Box -->
+                <div class="search-box">
+                    <input type="text" id="game-search" class="search-input" placeholder="Cari game atau voucher favorit...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+                
+                <!-- Category Tabs Navigation -->
+                <div class="filter-tabs" id="category-tabs">
+                    <button class="tab-btn active" data-category="all">Semua</button>
+                    <button class="tab-btn" data-category="mobile">Game HP</button>
+                    <button class="tab-btn" data-category="pc">Game PC</button>
+                    <button class="tab-btn" data-category="vouchers">Voucher & Aplikasi</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Game Grid Section -->
+        <main>
+            <div class="products-grid" id="products-container">
+                <!-- Skeleton cards while loading -->
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+        </main>
+
+        <!-- Footer Section -->
+        <footer>
+            <p>&copy; 2026 <a href="#" id="footer-link">parexxallgames</a>. Data disinkronkan dari <a href="https://www.codashop.com/id-id/" target="_blank" rel="noopener noreferrer">Codashop Indonesia</a>.</p>
+            <p>Ditenagai oleh Three.js 3D Engine &bull; Gusion Shadow Edition</p>
+        </footer>
+    </div>
+
+    <!-- Modal Transaction Overlay -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-content">
+            <button class="close-modal-btn" id="close-modal" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+            
+            <!-- Success Screen Overlay Inside Modal -->
+            <div class="success-screen" id="success-screen">
+                <i class="fa-solid fa-circle-check success-icon"></i>
+                <h3 class="success-title">Transaksi Berhasil!</h3>
+                <p class="success-desc" id="success-message">Layanan top-up Anda sedang diproses oleh sistem otomatis kami. Silakan periksa in-game mail dalam 1-3 menit.</p>
+                <button class="buy-btn" id="back-to-shop">Kembali Belanja</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Modal Game Info -->
+                <div class="modal-header-info">
+                    <img src="" alt="" class="modal-game-img" id="modal-game-img">
+                    <div>
+                        <h2 class="modal-game-title" id="modal-game-name">-</h2>
+                        <div class="modal-game-cat" id="modal-game-category">-</div>
+                    </div>
+                </div>
+
+                <form id="topup-form" onsubmit="event.preventDefault();">
+                    <!-- Step 1: Account Input -->
+                    <div class="topup-form-step">
+                        <div class="step-title">
+                            <span class="step-num">1</span>
+                            <h3>Lengkapi Akun In-Game</h3>
+                        </div>
+                        <div class="form-group-row" id="user-id-fields">
+                            <input type="text" class="input-field" id="user-id" placeholder="Masukkan User ID" required>
+                            <input type="text" class="input-field" id="zone-id" placeholder="Zone ID (Opsional)">
+                        </div>
+                        <p class="help-text" id="id-help">Contoh: 12345678 (1234). Untuk menemukan ID Anda, ketuk ikon profil di sudut kiri atas layar game Anda.</p>
+                    </div>
+
+                    <!-- Step 2: Package Select -->
+                    <div class="topup-form-step">
+                        <div class="step-title">
+                            <span class="step-num">2</span>
+                            <h3>Pilih Item Top-Up</h3>
+                        </div>
+                        <div class="packages-grid" id="packages-container">
+                            <!-- Dynamic rendering from script -->
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment Select -->
+                    <div class="topup-form-step">
+                        <div class="step-title">
+                            <span class="step-num">3</span>
+                            <h3>Pilih Metode Pembayaran</h3>
+                        </div>
+                        <div class="payment-grid" id="payment-container">
+                            <!-- Dynamic rendering from script -->
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Checkout Order Button -->
+                    <div class="checkout-section">
+                        <div class="price-summary">
+                            <span>Total Pembayaran:</span>
+                            <span class="total-amount" id="checkout-total">Rp 0</span>
+                        </div>
+                        <button type="submit" class="buy-btn" id="submit-purchase-btn">
+                            <i class="fa-solid fa-bolt"></i>
+                            Bayar Sekarang
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script imports: Three.js core and Custom App Logic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
